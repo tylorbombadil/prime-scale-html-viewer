@@ -1,0 +1,35 @@
+
+# PRIME SCALE APP – FULL PATH + MODULE EXECUTION CLI CHEATSHEET
+
+## TERRAIN SCALE
+cd /storage/emulated/0/Documents/prime-scale-app 
+python -m scripts.main terrain \
+  --prime-count 1000 \
+  --base-frequency 220.0 \
+  --num-notes 8 \
+  --window-size 0.007 \
+  --density-resolution 4000 \
+  --mode valley \
+  --weight-curve 1.0 \
+  --include-bounds
+
+## GAP SCALE
+cd /storage/emulated/0/Documents/prime-scale-app
+python -m scripts.main gap --prime-count 1000 --base-frequency 220.0 --threshold-range 0.01 0.05 --step-size 0.001 --note-goal 9 --tolerance 1
+
+## PURE PRIME SCALE
+cd /storage/emulated/0/Documents/prime-scale-app 
+python -m scripts.main pure \
+  --prime-count 128 \
+  --base-frequency 220.0 \
+  --density-resolution 4000 \
+  --include-bounds
+
+## CLUSTER ANALYSIS (WIP - OUTPUT TO TERMINAL ONLY)
+cd /storage/emulated/0/Documents/prime-scale-app 
+python -m scripts.main cluster \
+  --tier 128
+
+## NOTE:
+# These assume your working directory is set to: /storage/emulated/0/Documents/prime-scale-app
+# If not, cd into that directory or adjust accordingly.

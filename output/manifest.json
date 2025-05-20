@@ -1,0 +1,12 @@
+{
+  "scales": [
+    "gap_scout_match_5_notes.json",
+    "log_prime_scale_3_valley.json",
+    "log_prime_scale_6_valley.json",
+    "log_prime_scale_6_peak.json",
+    "log_prime_scale_13_valley.json",
+    "pure_prime_scale_128_primes.json",
+    "sample_scale.json",
+    "terrain_scale_8_valley.json"
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "name": "terrain_scale_8_valley",
+  "base_frequency": 220.0,
+  "notes": [
+    {
+      "log_position": 0.0,
+      "frequency": 220.0,
+      "midi": 57,
+      "cents_from_base": 0.0,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.07575,
+      "frequency": 231.85993137814998,
+      "midi": 58,
+      "cents_from_base": 90.89999999999999,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.178,
+      "frequency": 248.88918182609805,
+      "midi": 59,
+      "cents_from_base": 213.6,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.2845,
+      "frequency": 267.9573749645833,
+      "midi": 60,
+      "cents_from_base": 341.4,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.495,
+      "frequency": 310.0505661312443,
+      "midi": 63,
+      "cents_from_base": 594.0,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.61025,
+      "frequency": 335.8352167377353,
+      "midi": 64,
+      "cents_from_base": 732.3,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.672,
+      "frequency": 350.5216423656564,
+      "midi": 65,
+      "cents_from_base": 806.4000000000001,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.763,
+      "frequency": 373.3434767505944,
+      "midi": 66,
+      "cents_from_base": 915.6,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.95775,
+      "frequency": 427.3012459589087,
+      "midi": 68,
+      "cents_from_base": 1149.3,
+      "prime_sources": []
+    },
+    {
+      "log_position": 1.0,
+      "frequency": 440.0,
+      "midi": 69,
+      "cents_from_base": 1200.0,
+      "prime_sources": []
+    }
+  ]
+}

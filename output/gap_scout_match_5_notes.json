@@ -1,0 +1,55 @@
+{
+  "name": "gap_scout_match_5_notes",
+  "base_frequency": 220.0,
+  "notes": [
+    {
+      "log_position": 0.0,
+      "frequency": 220.0,
+      "midi": 57,
+      "cents_from_base": 0.0,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.07480798051337051,
+      "frequency": 231.70858596251097,
+      "midi": 58,
+      "cents_from_base": 89.76957661604462,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.6107910531958953,
+      "frequency": 335.9611884703146,
+      "midi": 64,
+      "cents_from_base": 732.9492638350744,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.6728648404106712,
+      "frequency": 350.73182965589353,
+      "midi": 65,
+      "cents_from_base": 807.4378084928054,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.7630023064687417,
+      "frequency": 373.34407362361526,
+      "midi": 66,
+      "cents_from_base": 915.60276776249,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.9068881985485664,
+      "frequency": 412.4993146254886,
+      "midi": 68,
+      "cents_from_base": 1088.2658382582797,
+      "prime_sources": []
+    },
+    {
+      "log_position": 1.0,
+      "frequency": 440.0,
+      "midi": 69,
+      "cents_from_base": 1200.0,
+      "prime_sources": []
+    }
+  ]
+}

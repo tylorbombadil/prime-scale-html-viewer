@@ -1,0 +1,65 @@
+{
+  "name": "sample_scale",
+  "base_frequency": 220.0,
+  "notes": [
+    {
+      "frequency": 220.0,
+      "cents_from_base": 0.0,
+      "midi": 57,
+      "log_position": 0.0,
+      "prime_sources": []
+    },
+    {
+      "frequency": 246.94,
+      "cents_from_base": 200.0,
+      "midi": 59,
+      "log_position": 0.1667,
+      "prime_sources": [
+        3
+      ]
+    },
+    {
+      "frequency": 261.63,
+      "cents_from_base": 300.0,
+      "midi": 60,
+      "log_position": 0.25,
+      "prime_sources": [
+        5
+      ]
+    },
+    {
+      "frequency": 293.66,
+      "cents_from_base": 500.0,
+      "midi": 62,
+      "log_position": 0.4167,
+      "prime_sources": [
+        7
+      ]
+    },
+    {
+      "frequency": 329.63,
+      "cents_from_base": 700.0,
+      "midi": 64,
+      "log_position": 0.5833,
+      "prime_sources": [
+        11
+      ]
+    },
+    {
+      "frequency": 392.0,
+      "cents_from_base": 900.0,
+      "midi": 67,
+      "log_position": 0.75,
+      "prime_sources": [
+        13
+      ]
+    },
+    {
+      "frequency": 440.0,
+      "cents_from_base": 1200.0,
+      "midi": 69,
+      "log_position": 1.0,
+      "prime_sources": []
+    }
+  ]
+}
