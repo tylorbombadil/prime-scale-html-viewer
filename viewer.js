@@ -1,4 +1,49 @@
+
 const scaleDisplay = document.getElementById('scale-display');
+const canvas = document.getElementById('line-readout');
+const ctx = canvas.getContext('2d');
+
+function drawLineReadout(scale) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw base line
+  ctx.beginPath();
+  ctx.moveTo(0, canvas.height / 2);
+  ctx.lineTo(canvas.width, canvas.height / 2);
+  ctx.strokeStyle = '#888';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Draw segment boundaries
+  if (scale.segment_boundaries) {
+    ctx.strokeStyle = '#ccc';
+    scale.segment_boundaries.forEach(pos => {
+      const x = pos * canvas.width;
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, canvas.height);
+      ctx.stroke();
+    });
+  }
+
+  // Draw reduced primes
+  if (scale.log_prime_positions) {
+    ctx.fillStyle = '#888';
+    scale.log_prime_positions.forEach(pos => {
+      const x = pos * canvas.width;
+      ctx.fillRect(x, canvas.height / 2 - 5, 1, 10);
+    });
+  }
+
+  // Draw selected notes
+  ctx.fillStyle = 'black';
+  scale.notes.forEach(note => {
+    const x = note.log_position * canvas.width;
+    ctx.beginPath();
+    ctx.arc(x, canvas.height / 2, 4, 0, 2 * Math.PI);
+    ctx.fill();
+  });
+}
 
 function loadScale(filename) {
   fetch('output/' + filename)
@@ -26,6 +71,8 @@ function loadScale(filename) {
         scaleDisplay.appendChild(document.createTextNode(` → ${note.cents_from_base.toFixed(2)} cents`));
         scaleDisplay.appendChild(document.createElement('br'));
       });
+
+      drawLineReadout(scale);
     })
     .catch(err => {
       scaleDisplay.textContent = 'Failed to load scale file.';

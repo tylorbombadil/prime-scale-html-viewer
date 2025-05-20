@@ -6,11 +6,12 @@ Usage (run from project root):
   python -m scripts.main --scale-type gap ...
   python -m scripts.main --scale-type pure ...
 """
-
+#comment hashes are used to toggle between different implementations
 import argparse
-from scripts.core_terrain_scale import generate_terrain_scale
+#from scripts.core_terrain_scale import generate_terrain_scale
 from scripts.gap_threshold_scout import scan_thresholds
 from scripts.core_pure_prime_scale import generate_pure_prime_scale
+from scripts.core_terrain_scale_modified import generate_terrain_scale
 
 def main():
     parser = argparse.ArgumentParser(description="Prime Scale Generator CLI")

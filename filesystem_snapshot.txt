@@ -1,0 +1,126 @@
+.
+├── filesystem_snapshot.txt
+├── .git
+│   ├── branches
+│   ├── COMMIT_EDITMSG
+│   ├── config
+│   ├── description
+│   ├── HEAD
+│   ├── hooks
+│   │   ├── applypatch-msg.sample
+│   │   ├── commit-msg.sample
+│   │   ├── fsmonitor-watchman.sample
+│   │   ├── post-update.sample
+│   │   ├── pre-applypatch.sample
+│   │   ├── pre-commit.sample
+│   │   ├── pre-merge-commit.sample
+│   │   ├── prepare-commit-msg.sample
+│   │   ├── pre-push.sample
+│   │   ├── pre-rebase.sample
+│   │   ├── pre-receive.sample
+│   │   ├── push-to-checkout.sample
+│   │   └── update.sample
+│   ├── index
+│   ├── info
+│   │   └── exclude
+│   ├── logs
+│   │   ├── HEAD
+│   │   └── refs
+│   │       ├── heads
+│   │       └── remotes
+│   ├── objects
+│   │   ├── 0e
+│   │   │   └── a90af9f2d40e308382b982ab420a4fefff00d3
+│   │   ├── 14
+│   │   │   └── b4cc03c6b4772d8ceafe17b7797bb0b590e389
+│   │   ├── 21
+│   │   │   └── f96f7f09a15d87e1e740c4b72bf8c5ef95f3d8
+│   │   ├── 27
+│   │   │   └── 35a363470c6156c4dcfd0e76b398bc1d4af8e8
+│   │   ├── 30
+│   │   │   └── 5c76812aba20aaaf12327999387605e894547f
+│   │   ├── 36
+│   │   │   └── fc2fe0ef235ad586eaf813cd322195de83285d
+│   │   ├── 3e
+│   │   │   └── 74706b6eb5c525eabd85358edf749d03450cc2
+│   │   ├── 45
+│   │   │   └── 72e5544d3075d5e636ec8414e133b5840dfe27
+│   │   ├── 4c
+│   │   │   └── 977944eac86393c14a36cca446a0d0735d2f5b
+│   │   ├── 4d
+│   │   │   └── e7cc3d655360c75693cbd2fbc4ed08a3c3a786
+│   │   ├── 5d
+│   │   │   ├── 80c5277f177fb1c35818e45d6c24c6d918d95d
+│   │   │   └── cd5e8ab751a5c29987181a133865c5248f7fba
+│   │   ├── 74
+│   │   │   └── 33cc3417c7d28a9e0e4ef2742b31f9df30c17d
+│   │   ├── 78
+│   │   │   └── 000a90e01fb601edd47da2365cf70c98dba9f1
+│   │   ├── 83
+│   │   │   └── 72cc9657f94d41b8211ee3ad52dd45748acfd4
+│   │   ├── 8a
+│   │   │   ├── 7a05a96234e3afd60d618471d1caece3b770f9
+│   │   │   └── f33ee556e7fd9e216e3f2a4d8fd820a53e90d4
+│   │   ├── 8e
+│   │   │   └── a0153d12c78ca8bfa9ee411d86611df7ffea89
+│   │   ├── 95
+│   │   │   └── d496cc937627a0fcd2cba3877fadd7fa78835c
+│   │   ├── 99
+│   │   │   └── 6f282475010b04af41b4c80477c7833ff8867a
+│   │   ├── 9a
+│   │   │   └── 7ee652bf4ba6344d16aadf83a803629f9b1208
+│   │   ├── 9f
+│   │   │   └── 343eabff9c4b99fc480d3a1924036df08f0822
+│   │   ├── af
+│   │   │   └── dccddfe5f2ae7a64d508a9b485948c5edc68f0
+│   │   ├── c0
+│   │   │   └── 328fea381a2d199e165c261a288b9b2a6c0f1a
+│   │   ├── c3
+│   │   │   └── 29cfe77a206ed23f6c25eadf82d8b2bf08667e
+│   │   ├── d9
+│   │   │   └── a34e35211d2cb11607a4b829755ede66e5cb40
+│   │   ├── e6
+│   │   │   └── 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+│   │   ├── e8
+│   │   │   └── d66718d01518759dccbaf41f562777919a7bee
+│   │   ├── ea
+│   │   │   └── 74ef22ce2c2ba39c64555251381df317a5155d
+│   │   ├── ed
+│   │   │   └── 8ab122ed5d96c1c788e12aa9f0ef20494e55ab
+│   │   ├── info
+│   │   └── pack
+│   └── refs
+│       ├── heads
+│       │   └── master
+│       ├── remotes
+│       │   └── origin
+│       └── tags
+├── index.html
+├── output
+│   ├── gap_scout_match_5_notes.json
+│   ├── log_prime_scale_13_valley.json
+│   ├── log_prime_scale_3_valley.json
+│   ├── log_prime_scale_6_peak.json
+│   ├── log_prime_scale_6_valley.json
+│   ├── manifest.json
+│   ├── pure_prime_scale_128_primes.json
+│   ├── sample_scale.json
+│   └── terrain_scale_8_valley.json
+├── readmes
+│   ├── code_paste_template.md
+│   ├── final_architecture_README.md
+│   ├── nextgen_README_consolidated.md
+│   ├── prime_scale_cheatsheet_fullpath.txt
+│   └── prime_scale_drive_scripts_README.md
+├── scripts
+│   ├── binary_gap_analyzer.py
+│   ├── cluster_finder.py
+│   ├── core_pure_prime_scale.py
+│   ├── core_terrain_scale.py
+│   ├── gap_threshold_scout.py
+│   ├── __init__.py
+│   ├── main.py
+│   └── scale_utils.py
+└── viewer.js
+
+47 directories, 76 files
