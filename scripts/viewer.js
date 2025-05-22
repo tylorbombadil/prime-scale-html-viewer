@@ -6,12 +6,23 @@ const ctx = canvas.getContext('2d');
 function drawLineReadout(scale) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Draw base line
+  const primeY = canvas.height / 2;
+  const noteY = primeY - 10; // Slight offset above prime ticks
+
+  // Draw base prime line
   ctx.beginPath();
-  ctx.moveTo(0, canvas.height / 2);
-  ctx.lineTo(canvas.width, canvas.height / 2);
+  ctx.moveTo(0, primeY);
+  ctx.lineTo(canvas.width, primeY);
   ctx.strokeStyle = '#888';
   ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Draw note guide line
+  ctx.beginPath();
+  ctx.moveTo(0, noteY);
+  ctx.lineTo(canvas.width, noteY);
+  ctx.strokeStyle = '#bbb';
+  ctx.lineWidth = 0.5;
   ctx.stroke();
 
   // Draw segment boundaries
@@ -27,20 +38,20 @@ function drawLineReadout(scale) {
   }
 
   // Draw reduced primes
-  if (scale.metadata && scale.metadata.log_prime_positions) {
+  if (scale.log_prime_positions) {
     ctx.fillStyle = '#888';
-    scale.metadata.log_prime_positions.forEach(pos => {
+    scale.log_prime_positions.forEach(pos => {
       const x = pos * canvas.width;
-      ctx.fillRect(x, canvas.height / 2 - 5, 1, 10);
+      ctx.fillRect(x, primeY - 5, 1, 10);
     });
   }
 
-  // Draw selected notes
+  // Draw selected notes slightly above the prime line
   ctx.fillStyle = 'black';
   scale.notes.forEach(note => {
     const x = note.log_position * canvas.width;
     ctx.beginPath();
-    ctx.arc(x, canvas.height / 2, 4, 0, 2 * Math.PI);
+    ctx.arc(x, noteY, 4, 0, 2 * Math.PI);
     ctx.fill();
   });
 }

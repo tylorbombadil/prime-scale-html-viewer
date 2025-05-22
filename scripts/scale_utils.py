@@ -58,7 +58,7 @@ def add_bounds(notes, base_freq):
             "prime_sources": []
         }
     ]
-    return [bounds[0]] + notes + [bounds[1]]
+    return [0.0] + notes + [1.0]
 
 def export_json(scale_data, filename):
     # Always write to top-level /output/ folder
