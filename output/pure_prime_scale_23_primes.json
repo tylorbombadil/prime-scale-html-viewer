@@ -1,0 +1,238 @@
+{
+  "notes": [
+    {
+      "log_position": 0.0,
+      "frequency": 220.0,
+      "midi": 57,
+      "cents_from_base": 0.0,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.0,
+      "frequency": 220.0,
+      "midi": 57,
+      "cents_from_base": 0.0,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.5849625007211562,
+      "frequency": 330.0,
+      "midi": 64,
+      "cents_from_base": 701.96,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.32192809488736235,
+      "frequency": 275.0,
+      "midi": 61,
+      "cents_from_base": 386.31,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.8073549220576041,
+      "frequency": 385.0,
+      "midi": 67,
+      "cents_from_base": 968.83,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.45943161863729726,
+      "frequency": 302.5,
+      "midi": 63,
+      "cents_from_base": 551.32,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.7004397181410922,
+      "frequency": 357.5,
+      "midi": 65,
+      "cents_from_base": 840.53,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.0874628412503394,
+      "frequency": 233.75,
+      "midi": 58,
+      "cents_from_base": 104.96,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.2479275134435855,
+      "frequency": 261.25,
+      "midi": 60,
+      "cents_from_base": 297.51,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.5235619560570128,
+      "frequency": 316.25,
+      "midi": 63,
+      "cents_from_base": 628.27,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.8579809951275721,
+      "frequency": 398.75,
+      "midi": 67,
+      "cents_from_base": 1029.58,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.9541963103868752,
+      "frequency": 426.25,
+      "midi": 68,
+      "cents_from_base": 1145.04,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.20945336562894978,
+      "frequency": 254.375,
+      "midi": 60,
+      "cents_from_base": 251.34,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.3575520046180837,
+      "frequency": 281.875,
+      "midi": 61,
+      "cents_from_base": 429.06,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.42626475470209796,
+      "frequency": 295.625,
+      "midi": 62,
+      "cents_from_base": 511.52,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.5545888516776374,
+      "frequency": 323.125,
+      "midi": 64,
+      "cents_from_base": 665.51,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.7279204545631992,
+      "frequency": 364.375,
+      "midi": 66,
+      "cents_from_base": 873.5,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.8826430493618412,
+      "frequency": 405.625,
+      "midi": 68,
+      "cents_from_base": 1059.17,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.9307373375628862,
+      "frequency": 419.375,
+      "midi": 68,
+      "cents_from_base": 1116.88,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.06608919045777244,
+      "frequency": 230.312,
+      "midi": 58,
+      "cents_from_base": 79.31,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.14974711950468206,
+      "frequency": 244.062,
+      "midi": 59,
+      "cents_from_base": 179.7,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.18982455888001723,
+      "frequency": 250.938,
+      "midi": 59,
+      "cents_from_base": 227.79,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.30378074817710293,
+      "frequency": 271.562,
+      "midi": 61,
+      "cents_from_base": 364.54,
+      "prime_sources": []
+    },
+    {
+      "log_position": 0.37503943134692475,
+      "frequency": 285.312,
+      "midi": 62,
+      "cents_from_base": 450.05,
+      "prime_sources": []
+    },
+    {
+      "log_position": 1.0,
+      "frequency": 440.0,
+      "midi": 69,
+      "cents_from_base": 1200.0,
+      "prime_sources": []
+    }
+  ],
+  "metadata": {
+    "prime_count": 23,
+    "primes": [
+      2,
+      3,
+      5,
+      7,
+      11,
+      13,
+      17,
+      19,
+      23,
+      29,
+      31,
+      37,
+      41,
+      43,
+      47,
+      53,
+      59,
+      61,
+      67,
+      71,
+      73,
+      79,
+      83
+    ],
+    "log_prime_positions": [
+      0.0,
+      0.0,
+      0.5849625007211562,
+      0.32192809488736235,
+      0.8073549220576041,
+      0.45943161863729726,
+      0.7004397181410922,
+      0.0874628412503394,
+      0.2479275134435855,
+      0.5235619560570128,
+      0.8579809951275721,
+      0.9541963103868752,
+      0.20945336562894978,
+      0.3575520046180837,
+      0.42626475470209796,
+      0.5545888516776374,
+      0.7279204545631992,
+      0.8826430493618412,
+      0.9307373375628862,
+      0.06608919045777244,
+      0.14974711950468206,
+      0.18982455888001723,
+      0.30378074817710293,
+      0.37503943134692475,
+      1.0
+    ],
+    "algorithm_manifest": {
+      "name": "pure_prime_scale",
+      "description": "Unfiltered prime positions mapped directly to pitch space"
+    }
+  }
+}

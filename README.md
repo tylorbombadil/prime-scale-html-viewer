@@ -14,7 +14,7 @@ The final goal is to translate these schema-based Python modules into **JavaScri
 
 ## The Schema Convention (Key Concept)
 
-The file `core_terrain_scale_final_rewired_debug.py` is the official schema prototype.
+The file `core_terrain_scale.py` is the official schema prototype.
 
 All other algorithms must eventually adopt its structure, either by:
 
@@ -36,7 +36,7 @@ All other algorithms must eventually adopt its structure, either by:
 
 ```text
 scripts/
-├── core_terrain_scale_final_rewired_debug.py   <- Schema GOLD STANDARD
+├── core_terrain_scale.py   <- Schema GOLD STANDARD
 ├── scale_utils.py                              <- Shared utilities
 ├── update_manifest.py                          <- Refreshes manifest for viewer
 ```

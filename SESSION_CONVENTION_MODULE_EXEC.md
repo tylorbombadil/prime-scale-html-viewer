@@ -1,5 +1,9 @@
 # Prime Scale App – Modular Convention Declaration
-# Past any prompts here that you want as convention for switching yout AI modle to the current architecture mode.
+
+# note to other collaborators:
+# This md is to help me to prompt GPT so that the model and I agree about the architecture that we are currently coding and debugging for.
+# This approach is a bug prevention measure because chat GPT is heavily reliant on internal tags. This just starts the session 
+# on the right foot.
 > **This session uses strict `-m` module execution style and structured package-based architecture.**  
 > Do not deviate from these rules unless explicitly instructed.
 

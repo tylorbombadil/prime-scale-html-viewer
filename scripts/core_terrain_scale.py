@@ -2,14 +2,16 @@
 import argparse
 import os
 import json
+import math
 
 # Shared utility functions
-from scripts.scale_utils import (
+from scripts.scale_utils import(
     generate_primes,
     reduce_value,
     get_log_positions,
     generate_density_axis,
-    add_bounds
+    add_bounds,
+    export_json
 )
 
 # ===[ TERRAIN-SPECIFIC FUNCTION ]===
@@ -53,7 +55,7 @@ def generate_scale(prime_count, base_frequency, num_notes, window_size, density_
 
     # Step 5: Optionally include lower and upper bounds (0.0 and 1.0)
     if include_bounds:
-        selected_notes = add_bounds(selected_notes, base_frequency)
+        selected_notes = add_bounds(selected_notes)
 
     # Step 6: Package note data and export to JSON
     notes = []
@@ -67,7 +69,7 @@ def generate_scale(prime_count, base_frequency, num_notes, window_size, density_
             "midi": midi,
             "cents_from_base": cents
         })
-    log_positions = get_log_positions(reduced_primes)
+
     metadata = {
         "prime_count": len(primes),
         "primes": primes,
@@ -79,14 +81,16 @@ def generate_scale(prime_count, base_frequency, num_notes, window_size, density_
             "name": "terrain_scale_rewired_fixed_with_bounds",
             "window_size": window_size,
             "lens_profile": "gravitational",
-            "mode": mode
-        }
+            "mode": mode,
+            "note_segments": selected_notes
+        }    
     }
 
     scale_data = {
         "name": f"terrain_scale_{num_notes}_{mode}",
         "base_frequency": base_frequency,
         "notes": notes,
+        "log_positions": log_positions, 
         "metadata": metadata
     }
 
@@ -96,9 +100,10 @@ def generate_scale(prime_count, base_frequency, num_notes, window_size, density_
 
     print(f"✔ Scale saved to {os.path.abspath(output_path)}")
 
+    return notes, metadata
+
 # ===[ ENTRY POINT ]===
 if __name__ == "__main__":
-    import math
     parser = argparse.ArgumentParser(description="Generate a terrain-based prime scale using full shared utility set.")
     parser.add_argument("--prime-count", type=int, default=1000)
     parser.add_argument("--base-frequency", type=float, default=220.0)
