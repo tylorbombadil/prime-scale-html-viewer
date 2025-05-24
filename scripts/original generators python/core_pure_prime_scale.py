@@ -5,56 +5,40 @@ from scripts.scale_utils import (
     get_log_positions,
     add_bounds,
     export_json,
-    generate_density_axis
+    generate_density_axis  # included for compatibility and visualization
 )
 
 def generate_pure_prime_scale(prime_count, base_frequency, include_bounds=True, density_resolution=4000):
-    # Step 1: Generate prime numbers
     primes = generate_primes(prime_count)
-
-    # Step 2: Reduce and map primes to log2 positions
     log_positions = get_log_positions(primes)
 
-    # Step 3: Optional density axis (for visual harmony)
+    # Optional: generate axis for any future visualization
     _ = generate_density_axis(density_resolution)
 
-    # Step 4: Add bounds as positions BEFORE formatting
-    if include_bounds:
-        log_positions = add_bounds(log_positions, base_frequency)
-
-    # Step 5: Convert log positions to full note objects
     notes = []
     for log_pos in log_positions:
         freq = base_frequency * (2 ** log_pos)
         notes.append({
             "log_position": log_pos,
-            "frequency": round(freq, 3),
+            "frequency": freq,
             "midi": round(69 + 12 * math.log2(freq / 440.0)),
-            "cents_from_base": round(1200 * log_pos, 2),
+            "cents_from_base": 1200 * log_pos,
             "prime_sources": []
         })
 
-    # Step 6: Create metadata block
-    metadata = {
-        "prime_count": len(primes),
-        "primes": primes,
-        "log_prime_positions": log_positions,
-        "algorithm_manifest": {
-            "name": "pure_prime_scale",
-            "description": "Unfiltered prime positions mapped directly to pitch space"
-        }
-    }
+    if include_bounds:
+        notes = add_bounds(notes, base_frequency)
 
-    # Step 7: Package and export
     scale_data = {
-        "notes": notes,
-        "metadata": metadata
+        "name": f"pure_prime_scale_{prime_count}_primes",
+        "base_frequency": base_frequency,
+        "notes": notes
     }
 
     export_json(scale_data, f"pure_prime_scale_{prime_count}_primes.json")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Generate a scale from raw primes with no filtering.")
+    parser = argparse.ArgumentParser()
     parser.add_argument("--prime-count", type=int, required=True)
     parser.add_argument("--base-frequency", type=float, default=220.0)
     parser.add_argument("--density-resolution", type=int, default=4000)

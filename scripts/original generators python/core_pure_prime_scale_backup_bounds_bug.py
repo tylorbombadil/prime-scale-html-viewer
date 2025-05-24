@@ -1,5 +1,7 @@
 import argparse
 import math
+import os
+print("CWD:", os.getcwd())
 from scripts.scale_utils import (
     generate_primes,
     get_log_positions,
@@ -18,21 +20,23 @@ def generate_pure_prime_scale(prime_count, base_frequency, include_bounds=True, 
     # Step 3: Optional density axis (for visual harmony)
     _ = generate_density_axis(density_resolution)
 
-    # Step 4: Add bounds as positions BEFORE formatting
-    if include_bounds:
-        log_positions = add_bounds(log_positions, base_frequency)
-
-    # Step 5: Convert log positions to full note objects
+    # Step 4: Convert log positions to notes
     notes = []
     for log_pos in log_positions:
         freq = base_frequency * (2 ** log_pos)
+        midi = round(69 + 12 * math.log2(freq / 440.0))
+        cents = round(1200 * log_pos, 2)
         notes.append({
             "log_position": log_pos,
             "frequency": round(freq, 3),
-            "midi": round(69 + 12 * math.log2(freq / 440.0)),
-            "cents_from_base": round(1200 * log_pos, 2),
+            "midi": midi,
+            "cents_from_base": cents,
             "prime_sources": []
         })
+
+    # Step 5: Optionally add 0.0 and 1.0 boundaries
+    if include_bounds:
+        notes = add_bounds(notes, base_frequency)
 
     # Step 6: Create metadata block
     metadata = {

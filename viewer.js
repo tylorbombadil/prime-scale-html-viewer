@@ -35,12 +35,23 @@ function drawLineReadout(scale) {
     });
   }
 
-  // Draw selected notes
+// Draw only floating scale notes
+ctx.fillStyle = 'black';
+const scaleLineOffset = 14;
+
+scale.notes.forEach(note => {
+  const x = note.log_position * canvas.width;
+  const y = canvas.height / 2 - scaleLineOffset;
+
+  ctx.beginPath();
+  ctx.arc(x, y, 4, 0, 2 * Math.PI);
+  ctx.fill();
+});
+
   ctx.fillStyle = 'black';
   scale.notes.forEach(note => {
     const x = note.log_position * canvas.width;
     ctx.beginPath();
-    ctx.arc(x, canvas.height / 2, 4, 0, 2 * Math.PI);
     ctx.fill();
   });
 }
