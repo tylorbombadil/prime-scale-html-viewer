@@ -46,15 +46,11 @@ def generate_scale(prime_count, base_frequency, num_notes, window_size, density_
 
     # Step 4: Split axis into even segments and pick a representative from each
     segment_width = 1.0 / num_notes
-    sweep_width = window_size
     selected_notes = []
-
     for i in range(num_notes):
-        center = (i + 0.5) * segment_width
-        segment_range = [
-            (x, d) for x, d in zip(x_axis, density_map)
-            if min(abs(center - x), 1 - abs(center - x)) <= sweep_width / 2
-    ]
+        start = i * segment_width
+        end = start + segment_width
+        segment_range = [(x, d) for x, d in zip(x_axis, density_map) if start <= x < end]
         if segment_range:
             best_x = min(segment_range, key=lambda t: t[1])[0] if mode == "valley" else max(segment_range, key=lambda t: t[1])[0]
             selected_notes.append(best_x)

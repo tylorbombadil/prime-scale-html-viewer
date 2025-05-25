@@ -36,10 +36,28 @@ def generate_density_axis(resolution):
 def circular_distance(a, b):
     return min(abs(a - b), 1 - abs(a - b))
 
-def prime_weight(p, curve=1.0):
-    if curve == 0.0:
-        return 1.0
-    return 1 / (p ** curve)
+def prime_weight(p, user_input):
+    """
+    Logarithmic analog contrast control:
+    - user_input = -1.0 → weight = 1 / p  (stronger small prime influence)
+    - user_input =  0.0 → weight = 1.0    (neutral influence accross the board)
+    - user_input = +1.0 → weight = p      (stronger larg prime influence)
+
+    Smooth, continuous interpolation using log math.
+    If input exceeds bounds, clamps and notifies.
+    """
+    if user_input < -1.0:
+        print(f"Input {user_input} below -1.0, clamping to -1.0")
+        dial = -1.0
+    elif user_input > 1.0:
+        print(f"Input {user_input} above 1.0, clamping to 1.0")
+        dial = 1.0
+    else:
+        dial = user_input
+
+    log_target = math.log(p) * (1 + dial)  # from log(1) to log(p^2)
+    target = math.exp(log_target)
+    return target / p
 
 def add_bounds(notes, base_freq):
     bounds = [

@@ -1,6 +1,8 @@
+# comming very soon:
 # Prime Scale App – Class-Based Plugin Architecture
 
 This document introduces the refactor to a modular, class-based structure for scale generation logic.
+GTP suggested that we go this route ult
 
 ---
 
