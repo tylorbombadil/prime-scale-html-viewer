@@ -46,11 +46,15 @@ def generate_scale(prime_count, base_frequency, num_notes, window_size, density_
 
     # Step 4: Split axis into even segments and pick a representative from each
     segment_width = 1.0 / num_notes
+    sweep_width = window_size
     selected_notes = []
+
     for i in range(num_notes):
-        start = i * segment_width
-        end = start + segment_width
-        segment_range = [(x, d) for x, d in zip(x_axis, density_map) if start <= x < end]
+        center = (i + 0.5) * segment_width
+        segment_range = [
+            (x, d) for x, d in zip(x_axis, density_map)
+            if min(abs(center - x), 1 - abs(center - x)) <= sweep_width / 2
+    ]
         if segment_range:
             best_x = min(segment_range, key=lambda t: t[1])[0] if mode == "valley" else max(segment_range, key=lambda t: t[1])[0]
             selected_notes.append(best_x)
@@ -79,6 +83,7 @@ def generate_scale(prime_count, base_frequency, num_notes, window_size, density_
         "linear_prime_positions": reduced_primes,
         "x_axis": x_axis,
         "density_map": density_map,
+        "segment_boundaries": [i / num_notes for i in range(num_notes + 1)],
         "algorithm_manifest": {
             "name": "terrain_scale_rewired_fixed_with_bounds",
             "window_size": window_size,

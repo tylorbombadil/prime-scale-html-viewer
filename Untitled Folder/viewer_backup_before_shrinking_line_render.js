@@ -14,68 +14,62 @@ function drawLineReadout(scale) {
   ctx.lineWidth = 1;
   ctx.stroke();
 
-  // Draw prime ticks using opacity decay
-  if (scale.metadata && scale.metadata.primes && scale.metadata.log_prime_positions) {
-    const primes = scale.metadata.primes;
-    const positions = scale.metadata.log_prime_positions;
-    const maxPrime = Math.max(...primes);
-
-    const tickHeight = 10;
-
-    primes.forEach((prime, i) => {
-      const x = positions[i] * canvas.width;
-      const opacity = 1 - (prime / maxPrime);  // smaller primes = more opaque
-      ctx.fillStyle = `rgba(100, 100, 100, ${opacity.toFixed(2)})`;
-      ctx.fillRect(x, canvas.height / 2 - tickHeight / 2, 1, tickHeight);
+  // Draw reduced primes
+  if (scale.metadata && scale.metadata.log_prime_positions) {
+    ctx.fillStyle = '#888';
+    scale.metadata.log_prime_positions.forEach(pos => {
+      const x = pos * canvas.width;
+      ctx.fillRect(x, canvas.height / 2 - 5, 1, 10);
     });
   }
 
-  // Draw floating scale notes
-  ctx.fillStyle = 'black';
-  const scaleLineOffset = 14;
+// Draw only floating scale notes
+ctx.fillStyle = 'black';
+const scaleLineOffset = 14;
 
-  scale.notes.forEach(note => {
-    const x = note.log_position * canvas.width;
-    const y = canvas.height / 2 - scaleLineOffset;
+scale.notes.forEach(note => {
+  const x = note.log_position * canvas.width;
+  const y = canvas.height / 2 - scaleLineOffset;
 
+  ctx.beginPath();
+  ctx.arc(x, y, 4, 0, 2 * Math.PI);
+  ctx.fill();
+});
+
+// Draw segment boundaries from metadata
+if (scale.metadata && scale.metadata.segment_boundaries) {
+  ctx.strokeStyle = '#cc0'; // Yellowish for visibility
+  ctx.lineWidth = 2;
+
+  scale.metadata.segment_boundaries.forEach(pos => {
+    const x = pos * canvas.width;
     ctx.beginPath();
-    ctx.arc(x, y, 4, 0, 2 * Math.PI);
-    ctx.fill();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, canvas.height);
+    ctx.stroke();
   });
 
-  // Draw segment boundaries from metadata
-  if (scale.metadata && scale.metadata.segment_boundaries) {
-    ctx.strokeStyle = '#cc0';
-    ctx.lineWidth = 2;
+  ctx.lineWidth = 1; // Reset after drawing
+}
 
-    scale.metadata.segment_boundaries.forEach(pos => {
-      const x = pos * canvas.width;
-      ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, canvas.height);
-      ctx.stroke();
-    });
+// Draw density map as grayscale gradient
+if (scale.metadata && scale.metadata.density_map && scale.metadata.x_axis) {
+  const max = Math.max(...scale.metadata.density_map);
+  const min = Math.min(...scale.metadata.density_map);
 
-    ctx.lineWidth = 1; // Reset after drawing
-  }
+  scale.metadata.density_map.forEach((val, i) => {
+    const x = scale.metadata.x_axis[i] * canvas.width;
+    const norm = (val - min) / (max - min);
+    const gray = Math.floor(norm * 255); // 0–255 grayscale
+    ctx.strokeStyle = `rgb(${gray}, ${gray}, ${gray})`;
 
-  // Draw density map as grayscale
-  if (scale.metadata && scale.metadata.density_map && scale.metadata.x_axis) {
-    const max = Math.max(...scale.metadata.density_map);
-    const min = Math.min(...scale.metadata.density_map);
+    ctx.beginPath();
+    ctx.moveTo(x, canvas.height / 2 + 30);
+    ctx.lineTo(x, canvas.height / 2 + 35);
+    ctx.stroke();
+  });
+}
 
-    scale.metadata.density_map.forEach((val, i) => {
-      const x = scale.metadata.x_axis[i] * canvas.width;
-      const norm = (val - min) / (max - min);
-      const gray = Math.floor(norm * 255);
-      ctx.strokeStyle = `rgb(${gray}, ${gray}, ${gray})`;
-
-      ctx.beginPath();
-      ctx.moveTo(x, canvas.height / 2 + 30);
-      ctx.lineTo(x, canvas.height / 2 + 35);
-      ctx.stroke();
-    });
-  }
 }
 
 function loadScale(filename) {
@@ -113,6 +107,7 @@ function loadScale(filename) {
     });
 }
 
+// Fetch manifest.json to populate dropdown
 fetch('output/manifest.json')
   .then(res => res.json())
   .then(manifest => {

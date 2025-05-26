@@ -15,9 +15,9 @@ function drawLineReadout(scale) {
   ctx.stroke();
 
   // Draw prime ticks using opacity decay
-  if (scale.metadata && scale.metadata.primes && scale.metadata.log_prime_positions) {
+  if (scale.metadata && scale.metadata.primes && scale.metadata.linear_prime_positions) {
     const primes = scale.metadata.primes;
-    const positions = scale.metadata.log_prime_positions;
+    const positions = scale.metadata.linear_prime_positions;
     const maxPrime = Math.max(...primes);
 
     const tickHeight = 10;

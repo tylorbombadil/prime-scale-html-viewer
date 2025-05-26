@@ -83,6 +83,7 @@ def generate_scale(prime_count, base_frequency, num_notes, window_size, density_
         "linear_prime_positions": reduced_primes,
         "x_axis": x_axis,
         "density_map": density_map,
+        "segment_boundaries": [i / num_notes for i in range(num_notes + 1)],
         "algorithm_manifest": {
             "name": "terrain_scale_rewired_fixed_with_bounds",
             "window_size": window_size,
@@ -100,11 +101,8 @@ def generate_scale(prime_count, base_frequency, num_notes, window_size, density_
         "metadata": metadata
     }
 
-    output_path = os.path.expanduser(f"~/prime-scale-html-viewer/output/terrain_scale_{num_notes}_{mode}.json")
-    with open(output_path, "w") as f:
-        json.dump(scale_data, f, indent=2)
-
-    print(f"✔ Scale saved to {os.path.abspath(output_path)}")
+    filename = None
+    export_json(scale_data, filename)
 
     return notes, metadata
 

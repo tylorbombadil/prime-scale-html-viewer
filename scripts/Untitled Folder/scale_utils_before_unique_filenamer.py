@@ -1,7 +1,6 @@
 import math
 import json
 import os
-from datetime import datetime
 
 def generate_primes(n):
     primes = [2]
@@ -79,17 +78,14 @@ def add_bounds(notes, base_freq):
     ]
     return [0.0] + notes + [1.0]
 
-def export_json(scale_data, filename=None):
+def export_json(scale_data, filename):
+    # Always write to top-level /output/ folder
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
     output_dir = os.path.join(project_root, "output")
+
     os.makedirs(output_dir, exist_ok=True)
-
-    if not filename:
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"scale_{timestamp}.json"
-
-    full_path = os.path.join(output_dir, filename)
+    full_path = os.path.join(output_dir, os.path.basename(filename))
 
     with open(full_path, "w", encoding="utf-8") as f:
         json.dump(scale_data, f, indent=2)

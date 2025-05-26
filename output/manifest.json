@@ -1,28 +1,8 @@
 {
   "scales": [
-    "terrain_scale_8_valley.json",
-    "terrain_scale_8_peak.json",
-    "terrain_scale_6_peak.json",
-    "terrain_scale_5_valley.json",
-    "terrain_scale_36_peak.json",
-    "terrain_scale_20_valley.json",
-    "terrain_scale_17_peak.json",
-    "terrain_scale_16_valley.json",
-    "terrain_scale_11_peak.json",
-    "sample_scale.json",
-    "pure_prime_scale_41_primes.json",
-    "pure_prime_scale_39_primes.json",
-    "pure_prime_scale_37_primes.json",
-    "pure_prime_scale_32_primes.json",
-    "pure_prime_scale_31_primes.json",
-    "pure_prime_scale_23_primes.json",
-    "pure_prime_scale_128_primes.json",
-    "pure_prime_20_rewired.json",
-    "log_prime_scale_6_valley.json",
-    "log_prime_scale_6_peak.json",
-    "log_prime_scale_3_valley.json",
-    "log_prime_scale_13_valley.json",
-    "gap_scout_match_5_notes.json",
-    "clean.json"
+    "scale_20250526_082847.json",
+    "scale_20250526_082542.json",
+    "scale_20250526_082336.json",
+    "scale_20250526_082050.json"
   ]
 }
