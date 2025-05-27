@@ -1,4 +1,5 @@
 # ===[ IMPORTS ]===
+from collections import OrderedDict
 import argparse
 import os
 import json
@@ -41,32 +42,40 @@ def generate_scale(prime_count, base_frequency, density_resolution, include_boun
             "prime_sources": []  # Empty since no mapping to individual primes here
         })
 
-    # Step 5: Construct metadata and scale data
-    metadata = {
-        "prime_count": len(primes),
-        "primes": primes,
-        "log_prime_positions": log_positions,
-        "x_axis": x_axis,
-        "algorithm_manifest": {
-            "name": "pure_prime_scale",
-            "description": "Unfiltered prime positions mapped directly to pitch space"
-        }
-    }
+    reduced_primes = [reduce_value(p) for p in primes] #generate reduced primes for metadata
 
-    scale_data = {
-        "name": f"pure_prime_scale_{prime_count}_primes",
-        "base_frequency": base_frequency,
-        "notes": notes,
-        "log_positions": log_positions,
-        "metadata": metadata
-    }
+# ===[Metadata, Scale data, and Algorithm Manifest]===
+    parameters = OrderedDict()
+
+    manifest= OrderedDict() 
+    manifest["name"] = "pure_prime_scale"
+    manifest["description"] = "Unfiltered prime positions mapped directly to pitch space"
+    manifest["notes"] = prime_count
+    manifest["include_bounds"] = include_bounds
+    manifest["parameters"] = parameters
+   
+    metadata = OrderedDict()
+    metadata["algorithm_manifest"] = manifest
+    metadata["prime_count"] = len(primes)
+    metadata["primes"] = primes
+    # metadata["segment_boundaries"] = [i / num_notes for i in range(num_notes + 1)]
+    metadata["log_prime_positions"] = log_positions
+    metadata["linear_prime_positions"] = reduced_primes
+    metadata["x_axis"] = x_axis
+    metadata["density_resolution"] = density_resolution
+    # metadata["density_map"] = density_map
+   
+    scale_data = OrderedDict()
+    scale_data["name"] = f"pure_prime_scale_{prime_count}_primes"
+    scale_data["base_frequency"] = base_frequency
+    scale_data["notes"] = notes
+    scale_data["log_positions"] = log_positions
+    scale_data["metadata"] = metadata
+    
 
     # Step 6: Export to JSON
-    output_path = os.path.expanduser(f"~/prime-scale-html-viewer/output/pure_prime_scale_{prime_count}_primes.json")
-    with open(output_path, "w") as f:
-        json.dump(scale_data, f, indent=2)
-
-    print(f"✔ Scale saved to {os.path.abspath(output_path)}")
+    filename = None
+    export_json(scale_data, filename)
 
     return notes, metadata
 

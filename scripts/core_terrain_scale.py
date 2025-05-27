@@ -1,4 +1,5 @@
 # ===[ IMPORTS ]===
+from collections import OrderedDict
 import argparse
 import os
 import json
@@ -76,30 +77,36 @@ def generate_scale(prime_count, base_frequency, num_notes, window_size, density_
             "cents_from_base": cents
         })
 
-    metadata = {
-        "prime_count": len(primes),
-        "primes": primes,
-        "log_prime_positions": log_positions,
-        "linear_prime_positions": reduced_primes,
-        "x_axis": x_axis,
-        "density_map": density_map,
-        "segment_boundaries": [i / num_notes for i in range(num_notes + 1)],
-        "algorithm_manifest": {
-            "name": "terrain_scale_rewired_fixed_with_bounds",
-            "window_size": window_size,
-            "lens_profile": "gravitational",
-            "mode": mode,
-            "note_segments": selected_notes
-        }    
-    }
+# ===[Metadata, Scale data, and Algorithm Manifest]===
+    parameters = OrderedDict()
+    parameters["window_size"] = window_size
+    parameters["lens_profile"] = "gravitational"
+    parameters["mode"] = mode
 
-    scale_data = {
-        "name": f"terrain_scale_{num_notes}_{mode}",
-        "base_frequency": base_frequency,
-        "notes": notes,
-        "log_positions": log_positions, 
-        "metadata": metadata
-    }
+    manifest= OrderedDict()
+    manifest["name"] = "terrain_scale"   
+    manifest["description"] = "sampling of prime density-peak and valley mode with other variable fields"
+    manifest["notes"] = num_notes
+    manifest["include_bounds"] = include_bounds
+    manifest["parameters"] = parameters
+
+    metadata = OrderedDict()
+    metadata["algorithm_manifest"] = manifest
+    metadata["prime_count"] =  len(primes)
+    metadata["primes"] = primes
+    metadata["segment_boundaries"] = [i / num_notes for i in range(num_notes + 1)]
+    metadata["log_prime_positions"] = log_positions
+    metadata["linear_prime_positions"] = reduced_primes
+    metadata["x_axis"] = x_axis
+    metadata["density_resolution"] = density_resolution
+    metadata["density_map"] = density_map
+
+    scale_data = OrderedDict()
+    scale_data["name"] = f"terrain_scale_{num_notes}_{mode}"
+    scale_data["base_frequency"] = base_frequency
+    scale_data["notes"] = notes
+    scale_data["log_positions"] = log_positions, 
+    scale_data["metadata"] = metadata
 
     filename = None
     export_json(scale_data, filename)

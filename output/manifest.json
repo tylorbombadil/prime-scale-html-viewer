@@ -1,8 +1,18 @@
 {
   "scales": [
+    "scale_20250526_195007.json",
+    "scale_20250526_194650.json",
+    "scale_20250526_185320.json",
+    "scale_20250526_185054.json",
+    "scale_20250526_184718.json",
+    "scale_20250526_184437.json",
+    "scale_20250526_161146.json",
+    "scale_20250526_155818.json",
+    "scale_20250526_153118.json",
     "scale_20250526_082847.json",
     "scale_20250526_082542.json",
     "scale_20250526_082336.json",
-    "scale_20250526_082050.json"
+    "scale_20250526_082050.json",
+    "pure_prime_scale_1000_primes.json"
   ]
 }

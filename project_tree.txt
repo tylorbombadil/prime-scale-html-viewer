@@ -1,0 +1,80 @@
+.
+├── bug_framing_cheat_card.md
+├── generate_manifest.py
+├── index.html
+├── old viewer
+│   ├── index_2.html
+│   ├── index.html
+│   ├── viewer_2.js
+│   └── viewer.js
+├── output
+│   ├── manifest.json
+│   ├── scale_20250526_082050.json
+│   ├── scale_20250526_082336.json
+│   ├── scale_20250526_082542.json
+│   └── scale_20250526_082847.json
+├── prime-scale-viewer-bootstrap
+│   ├── assets
+│   ├── index.html
+│   ├── js
+│   │   ├── draw.js
+│   │   ├── main.js
+│   │   └── utils.js
+│   └── style.css
+├── project_tree.txt
+├── README.md
+├── readmes
+│   ├── code_paste_template.md
+│   ├── final_architecture_README.md
+│   ├── nextgen_README_consolidated.md
+│   ├── prime_scale_cheatsheet_fullpath.txt
+│   └── prime_scale_drive_scripts_README.md
+├── script_prompt.py
+├── scripts
+│   ├── core_pure_prime_scale.py
+│   ├── core_terrain_scale.py
+│   ├── experiment class architecture
+│   │   ├── BaseScaleGenerator_and_Terrain
+│   │   ├── PurePrimeScaleGenerator.py
+│   │   └── README.class_architecture.md
+│   ├── __init__.py
+│   ├── original generators python
+│   │   ├── binary_gap_analyzer.py
+│   │   ├── cluster_finder.py
+│   │   ├── core_pure_prime_scale_backup_bounds_bug.py
+│   │   ├── core_pure_prime_scale.py
+│   │   └── gap_threshold_scout.py
+│   ├── __pycache__
+│   │   ├── core_pure_prime_rewired_debugged.cpython-310.pyc
+│   │   ├── core_pure_prime_scale.cpython-310.pyc
+│   │   ├── core_terrain_scale.cpython-310.pyc
+│   │   ├── core_terrain_scale_final_rewired.cpython-310.pyc
+│   │   ├── core_terrain_scale_final_rewired_debugged.cpython-310.pyc
+│   │   ├── core_terrain_scale_final_rewired_fixed.cpython-310.pyc
+│   │   ├── core_terrain_scale_modified.cpython-310.pyc
+│   │   ├── core_terrain_scale_shared_axis.cpython-310.pyc
+│   │   ├── gap_threshold_scout.cpython-310.pyc
+│   │   ├── __init__.cpython-310.pyc
+│   │   ├── main.cpython-310.pyc
+│   │   ├── scale_utils.cpython-310.pyc
+│   │   ├── select_candidates.cpython-310.pyc
+│   │   └── terrain_with_selector.cpython-310.pyc
+│   ├── readmes
+│   │   └── readmes.tar.gz
+│   ├── README.scale_utils.md
+│   ├── run_terrain_selector_test.sh
+│   ├── scale_utils.py
+│   └── Untitled Folder
+│       ├── core_terrain_scale_before_new_call.py
+│       └── scale_utils_before_unique_filenamer.py
+├── SESSION_CONVENTION_MODULE_EXEC.md
+├── Untitled Folder
+│   ├── viewer_attempt_opacity_render.js
+│   ├── viewer_backup_before_shrinking_line_render.js
+│   ├── viewer_bad_shrinking_line_render_fixed.js
+│   ├── viewer_final_attempt_shrinking_line_render.js
+│   ├── viewer_shinking_line_render_never_worked.js
+│   └── viewer_successful_label_render.js
+└── viewer.js
+
+14 directories, 63 files
