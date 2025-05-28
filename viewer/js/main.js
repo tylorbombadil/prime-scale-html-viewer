@@ -1,6 +1,9 @@
+import * as Tone from 'https://cdn.skypack.dev/tone';
+import { enableAudioOnClick } from './audio/startup_audio.js';
+enableAudioOnClick(); 
+
 import { drawScale } from './draw.js';
 import { loadScale } from './utils.js';
+import { setupDropdown } from './ui/dropdown.js';
 
-loadScale('../../output/scale_20250526_082847.json').then(scale => {
-  drawScale(scale);
-});
+setupDropdown(drawScale);

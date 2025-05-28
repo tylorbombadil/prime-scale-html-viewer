@@ -1,6 +1,7 @@
 import { drawNotes } from './modules/draw_notes.js';
 import { drawSegments } from './modules/draw_segments.js';
 import { drawPrimes } from './modules/draw_primes.js';
+import { drawDensity } from './modules/draw_density.js';
 
 export function drawScale(scale) {
   const canvas = document.getElementById('line-readout');
@@ -16,9 +17,8 @@ export function drawScale(scale) {
   ctx.lineWidth = 1;
   ctx.stroke();
 
-  drawPrimes(ctx, scale, canvas);
-  
+  drawPrimes(ctx, scale, canvas);  
   drawSegments(ctx, scale, canvas);
- 
   drawNotes(ctx, scale, canvas);
+  drawDensity(ctx, scale, canvas);
 }
