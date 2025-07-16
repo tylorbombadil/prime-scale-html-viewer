@@ -1,0 +1,341 @@
+# Project Architecture Snapshot
+
+## Directory Tree
+
+**.** _(Full Path: `/home/mint/my-root/my-dev-projects/github-remote-projects/prime-scale-app/prime-scale-html-viewer/viewer`)_
+
+├── **assets/**
+├── `index.html`
+├── **js/**
+│   ├── **audio/**
+│   │   ├── `startup_audio.js`
+│   │   └── `tone_play.js`
+│   ├── `draw.js`
+│   ├── `main.js`
+│   ├── **midi/**
+│   │   └── `midi_input.js`
+│   ├── **modules/**
+│   │   ├── `draw_density.js`
+│   │   ├── `draw_notes.js`
+│   │   ├── `draw_primes.js`
+│   │   └── `draw_segments.js`
+│   ├── **ui/**
+│   │   └── `dropdown.js`
+│   └── `utils.js`
+└── `style.css`
+
+---
+
+## Project Architecture Snapshot
+
+**/home/mint/my-root/my-dev-projects/github-remote-projects/prime-scale-app/prime-scale-html-viewer/viewer**
+
+        **assets/**
+
+        `index.html`
+        ```html
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8" />
+          <title>Prime Scale Viewer</title>
+          <link rel="stylesheet" href="style.css" />
+        </head>
+        <body>
+          <h1>Prime Scale Viewer</h1>
+          <div id="scale-display">Loading...</div>
+          <canvas id="line-readout" width="1000" height="80"></canvas>
+          <script type="module" src="./js/main.js"></script>
+        </body>
+        </html>
+        ```
+
+        **js/**
+
+            **js/audio/**
+
+                `js/audio/startup_audio.js`
+                ```js
+                import * as Tone from 'https://cdn.skypack.dev/tone';
+                
+                export function enableAudioOnClick() {
+                  document.body.addEventListener('click', async () => {
+                    if (Tone.context.state !== 'running') {
+                      await Tone.start();
+                    }
+                  console.log('Audio context resumed by user gesture');
+                  }, { once: true });
+                }
+                ```
+
+                `js/audio/tone_play.js`
+                ```js
+                import * as Tone from 'https://cdn.skypack.dev/tone';
+                const reverb = new Tone.Reverb({ decay: 4, wet: 0.5 }).toDestination();
+                const synth = new Tone.PolySynth(Tone.Synth).connect(reverb);
+                
+                export function playNote(frequency) {
+                  synth.triggerAttackRelease(frequency, "2n");
+                }
+                
+                export function resumeAudio() {
+                  if (Tone.context.state !== 'running') {
+                    Tone.context.resume();
+                   }
+                 }
+                ```
+
+            `js/draw.js`
+            ```js
+            import { drawNotes } from './modules/draw_notes.js';
+            import { drawSegments } from './modules/draw_segments.js';
+            import { drawPrimes } from './modules/draw_primes.js';
+            import { drawDensity } from './modules/draw_density.js';
+            
+            export function drawScale(scale) {
+              const canvas = document.getElementById('line-readout');
+              const ctx = canvas.getContext('2d');
+            
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+              // draw base line
+              ctx.beginPath();
+              ctx.moveTo(0, canvas.height / 2);
+              ctx.lineTo(canvas.width, canvas.height / 2);
+              ctx.strokeStyle = '#888';
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            
+              drawPrimes(ctx, scale, canvas);  
+              drawSegments(ctx, scale, canvas);
+              drawNotes(ctx, scale, canvas);
+              drawDensity(ctx, scale, canvas);
+            }
+            ```
+
+            `js/main.js`
+            ```js
+            import * as Tone from 'https://cdn.skypack.dev/tone';
+            import { enableAudioOnClick } from './audio/startup_audio.js';
+            
+            window.addEventListener('DOMContentLoaded', () => {
+              enableAudioOnClick(); 
+            });
+            
+            import { drawScale } from './draw.js';
+            import { loadScale } from './utils.js';
+            import { setupDropdown } from './ui/dropdown.js';
+            
+            setupDropdown(drawScale);
+            ```
+
+            **js/midi/**
+
+                `js/midi/midi_input.js`
+                ```js
+                import { playNote } from '../audio/tone_play.js';
+                
+                let midiInputs = [];
+                
+                export function setupMidiInput(scale) {
+                  navigator.requestMIDIAccess().then(midi => {
+                    // Clear old handlers
+                    for (const input of midiInputs) {
+                      input.onmidimessage = null;
+                    }
+                
+                    midiInputs = [...midi.inputs.values()];
+                
+                    for (const input of midiInputs) {
+                      input.onmidimessage = ({ data }) => {
+                        console.log('MIDI message:', data);
+                        const [status, note, velocity] = data;
+                
+                        if (status === 144 && velocity > 0) {
+                          const index = note - 60; // Middle C = 60
+                          const scaleNote = scale.notes[index];
+                
+                          if (scaleNote && scaleNote.frequency) {
+                            console.log(`Playing index ${index}: ${scaleNote.frequency}`);
+                            playNote(scaleNote.frequency);
+                          }
+                        }
+                      };
+                    }
+                  }).catch(err => {
+                    console.error("MIDI init failed:", err);
+                  });
+                }
+                ```
+
+            **js/modules/**
+
+                `js/modules/draw_density.js`
+                ```js
+                // Draw density map as grayscale
+                export function drawDensity(ctx, scale, canvas) {
+                  if (scale.metadata && scale.metadata.density_map && scale.metadata.x_axis) {
+                    const max = Math.max(...scale.metadata.density_map);
+                    const min = Math.min(...scale.metadata.density_map);
+                    const range = max - min || 1;
+                
+                    scale.metadata.density_map.forEach((val, i) => {
+                      const x = scale.metadata.x_axis[i] * canvas.width;
+                      const norm = (val - min) / range;
+                      const gray = Math.floor(norm * 255);
+                      ctx.strokeStyle = `rgb(${gray}, ${gray}, ${gray})`;
+                
+                      ctx.beginPath();
+                      ctx.moveTo(x, canvas.height / 2 + 30);
+                      ctx.lineTo(x, canvas.height / 2 + 35);
+                      ctx.stroke();
+                    });
+                  }
+                }
+                ```
+
+                `js/modules/draw_notes.js`
+                ```js
+                export function drawNotes(ctx, scale, canvas) {
+                  if (!scale.notes) return;
+                
+                  ctx.fillStyle = 'black';
+                  const offset = 14;
+                
+                  scale.notes.forEach(note => {
+                    const x = note.log_position * canvas.width;
+                    const y = canvas.height / 2 - offset;
+                
+                    ctx.beginPath();
+                    ctx.arc(x, y, 4, 0, 2 * Math.PI);
+                    ctx.fill();
+                  });
+                }
+                ```
+
+                `js/modules/draw_primes.js`
+                ```js
+                export function drawPrimes(ctx, scale, canvas) {
+                  const primes = scale.metadata?.log_prime_positions;
+                  if (!primes || !primes.length) return;
+                
+                  ctx.strokeStyle = '#ccc';
+                  ctx.lineWidth = 1;
+                
+                  primes.forEach(p => {
+                    const x = p * canvas.width;
+                    ctx.beginPath();
+                    ctx.moveTo(x, canvas.height / 2 - 10);
+                    ctx.lineTo(x, canvas.height / 2 + 10);
+                    ctx.stroke();
+                  });
+                }
+                ```
+
+                `js/modules/draw_segments.js`
+                ```js
+                export function drawSegments(ctx, scale, canvas) {
+                  if (!scale.metadata?.segment_boundaries) return;
+                
+                  ctx.strokeStyle = '#aaa';
+                  ctx.lineWidth = 1;
+                  ctx.setLineDash([5, 4]); // dashed
+                
+                  scale.metadata.segment_boundaries.forEach(pos => {
+                    const x = pos * canvas.width;
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, canvas.height);
+                    ctx.stroke();
+                  });
+                
+                  ctx.setLineDash([]); // reset dash
+                }
+                ```
+
+            **js/ui/**
+
+                `js/ui/dropdown.js`
+                ```js
+                import { setupMidiInput } from '../midi/midi_input.js';
+                import { playNote, resumeAudio } from '../audio/tone_play.js';
+                export function setupDropdown(drawCallback) {
+                  const scaleDisplay = document.getElementById('scale-display');
+                
+                  fetch('../output/manifest.json')
+                    .then(res => res.json())
+                    .then(manifest => {
+                      const dropdown = document.createElement('select');
+                      dropdown.onchange = () => loadScale(dropdown.value);
+                
+                      manifest.scales.forEach(file => {
+                        const option = document.createElement('option');
+                        option.value = file;
+                        option.textContent = file;
+                        dropdown.appendChild(option);
+                      });
+                
+                      document.body.insertBefore(dropdown, scaleDisplay);
+                      if (manifest.scales.length > 0) {
+                        loadScale(manifest.scales[0]);
+                      }
+                    })
+                    .catch(err => {
+                      scaleDisplay.textContent = 'Failed to load manifest file.';
+                      console.error(err);
+                    });
+                
+                  function loadScale(filename) {
+                    fetch('../output/' + filename)
+                      .then(res => res.json())
+                      .then(scale => {
+                        scaleDisplay.innerHTML = '';
+                        drawCallback(scale);
+                
+                  setupMidiInput(scale);
+                 
+                     console.log('scale.notes:', scale.notes)
+                
+                     const buttonContainer = document.createElement('div');
+                      buttonContainer.style.marginTop = '1em';
+                
+                      scale.notes.forEach(note => {
+                        const btn = document.createElement('button');
+                        btn.textContent = note.frequency.toFixed(2) + ' Hz';
+                        btn.style.margin = '4px';
+                        btn.onclick = () => playNote(note.frequency);
+                        buttonContainer.appendChild(btn);
+                      });
+                
+                      scaleDisplay.appendChild(buttonContainer);
+                      })
+                      .catch(err => {
+                        scaleDisplay.textContent = 'Failed to load scale file.';
+                        console.error(err);
+                      });
+                  }
+                }
+                ```
+
+            `js/utils.js`
+            ```js
+            export async function loadScale(path) {
+              const res = await fetch(path);
+              if (!res.ok) throw new Error('Failed to load scale file');
+              return await res.json();
+            }
+            ```
+
+        `style.css`
+        ```css
+        body {
+          font-family: sans-serif;
+          margin: 2rem;
+          background: #f4f4f4;
+        }
+        
+        canvas {
+          border: 1px solid #ccc;
+          background: #fff;
+        }
+        ```

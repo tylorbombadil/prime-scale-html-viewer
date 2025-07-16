@@ -2,7 +2,7 @@
 
 _Last updated: 2025-05-06_
 
-This README consolidates and replaces previous frontend and architecture planning documents. It defines the final architecture and development direction for the Prime Scale App as a modular, JavaScript-based APK-ready environment.
+This README consolidates and replaces previous frontend and architecture planning documents. It defines the final architecture and development direction for the Prime Scale App as a modular, JavaScript/java-based APK-ready environment.
 
 ---
 
